@@ -4,7 +4,8 @@
     "description": "",
     "main": "server.js",
     "scripts": {
-        "test": "echo \"Error: no test specified\" && exit 1"
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "build": "my-framework build --output public"
     },
     "keywords": [],
     "author": "",
@@ -14,9 +15,8 @@
         "express": "^4.17.1",
         "express-handlebars": "^3.1.0",
         "nodemon": "^1.19.3"
+    },
+    "engines": {
+        "node": "10.x"
     }
-	"engines": {
-		"node": "10.x"
-	}
 }
-
