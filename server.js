@@ -2,6 +2,8 @@ const express = require('express')
 const app = express()
 const puerto = 3000
 const path = require("path");
+const expressSession = require('express-session');
+
 
 
 //Axios
@@ -36,6 +38,24 @@ app.engine('handlebars', exphbs({
 app.set('view engine', 'handlebars')
 app.set('views', path.join(__dirname, 'views'));
 //Handlebars
+
+//Configuración de sesiones
+app.use(expressSession({
+    secret: 'el tiempo sin ti es empo',
+    resave: false,
+    saveUninitialized: false
+}));
+//Configuración de sesiones
+
+//MongoAtlas 1 
+const MongoClient = require('mongodb').MongoClient;
+const uri = "mongodb+srv://Lucas:J1z3RthWYkSxzlfD@comit-ofq8l.gcp.mongodb.net/test?retryWrites=true&w=majority";
+//MongoAtlas 1
+
+
+
+
+
 
 
 app.get("/", (req, res) => {
@@ -153,4 +173,85 @@ app.post('/bla', function(req, res) {
         });
 
 });
+
+app.post('/register', function(req, res) {
+    const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
+    console.dir(req.body)
+    if (req.body.usr && req.body.pwd && req.body.email) {
+        client.connect(err => {
+            const collection = client.db("UsuariosTyranido").collection("TyranidoDB");
+
+            try {
+                collection.insertOne({ usr: req.body.usr, pwd: req.body.pwd, email: req.body.email });
+                res.render('home', { mensaje: 'Register successful, you may login', tipo: 'success' })
+            } catch (e) {
+                print(e);
+            };
+        });
+    } else {
+        console.log("bla");
+    }
+
+    client.close();
+});
+
+
+app.post('/login', function(req, res) {
+    //MongoAtlas 2 lo tuve que poner aca porque mongo no le gusta multiples consultas en un mismo cliente
+    const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
+    //MongoAtlas 2
+    console.dir(req.body);
+    if (req.body.usr && req.body.pwd) {
+        //Si recibo ambos parametros, los busco en la DB
+        client.connect(err => {
+            // Apunto a la base y colección
+            const collection = client.db("UsuariosTyranido").collection("TyranidoDB");
+            // Si no hubo error...
+            if (!err) {
+                // Busco un documento en la colección que tenga "usr" y "pwd"
+                //.email .usr .pwd y .favorites tienen usuario, contraseña y array de imdb de favoritos
+                collection.findOne({ usr: req.body.usr, pwd: req.body.pwd }, (err, resConsulta) => {
+                    // Hecha la búsqueda, cierro la conexión
+
+
+
+                    // Si no hubo error...
+                    if (!err) {
+                        // Si el documento respondido contiene algo, no necesito validar nada: ya sé que
+                        // usuario y clave estaban bien. Caso contrario, alguno de los dos datos estaba mal.
+                        if (resConsulta) {
+                            //   console.dir(resConsulta);
+
+                            req.session.usr = req.body.usr;
+                            res.render('peliculas', { nombre: req.session.usr });
+                        } else {
+                            console.error("Error! algo no coincide");
+                            req.session.destroy();
+                            res.render('home', { mensaje: 'Wrong username and/or password.', tipo: 'danger' })
+                        }
+                    } else {
+                        // Si hubo error de consulta, respondemos un false
+                        console.error("Error de consulta!! UN EQUIPO DE MONOS ESPECIALIZADOS SE DIRIGE A SU LOCACION");
+                    }
+                });
+            } else {
+                // Si hubo error de conexión a Mongo, respondemos false
+                console.error("FALLO LA CONEXION A MONGO, RIP PROYECTO");
+            }
+        });
+
+
+
+    } else {
+        if (req.body.usr || req.body.pwd) res.render('home', { mensaje: 'Log-in with username & password.', tipo: 'warning' });
+        else { res.render('home', { mensaje: 'Log-in please.', tipo: 'success' }) };
+    };
+
+
+
+
+
+    client.close();
+});
+
 app.listen(puerto, () => console.log(`Estoy en https://localhost:${puerto}/`))

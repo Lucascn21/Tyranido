@@ -1,4 +1,25 @@
-<nav>
+    <form action="/bla" id="formulario" method="POST"></form>
+    <div class="container-fluid p-0">
+        <header>
+            <div class="container justify-content-center ">
+                <div class="row no-gutters">
+                    <div class="col-md-2 "></div>
+                    <div class="col-md-1" id="logo"><a href="/"></a> <p class="text-monospace text-white"> Hola {{nombre}}</p> </div>
+                    <div class="col-md-5  d-flex flex-wrap align-content-center ">
+                        <div class="input-group barrabuscadora">
+                            <input type="text" class="form-control bg-dark text-monospace text-white"
+                                placeholder="Buscar Pelicula por titulo" aria-label="" aria-describedby="basic-addon1"
+                                name="busqueda" type="submit" form="formulario">
+                            <div class="input-group-append bg-dark"><button class="btn btn-dark btn-sm boton"
+                                    formmethod="POST" form="formulario" type="submit"><i
+                                        class="material-icons md-18">search</i></button></div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 "></div>
+                </div>
+            </div>
+        </header>
+    </div>
 
 
 
@@ -8,7 +29,8 @@
     <div class="container h-100">
         <div class="row align-items-center h-100">
             <div class="col-6 mx-auto">
-                <div class="alert alert-dark" role="alert">
+                <div class="alert alert-dark" role="alert">}
+                   
                     Cantidad de resultados: {{listaPeliculas.length}} de {{resultados}}
 
                 </div>
@@ -22,8 +44,9 @@
 </div>
 
 
-<div class="container w-50 pt-3 bg-dark">
+<div class="container w-50 pt-3 bg-dark ">
     <ul class="nav justify-content-center">
+   
         <form action="/bla" id="filtrar" method="post" class="border border-secondary     border-left-0 ">
             <input type="submit" form="filtrar" formmethod="post"
                 class="text-warning font-weight-bold alert-warning bg-dark" data-toggle="tooltip" data-placement="right"

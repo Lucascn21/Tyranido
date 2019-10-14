@@ -1,13 +1,91 @@
+<link rel="stylesheet" type="text/css" href="styles/stylesHome.css">
 
-{{#if error}}
-    <div class="container h-100">
-    <div class="row align-items-center h-100">
-        <div class="col-6 mx-auto">
-               <div class="alert alert-danger" role="alert">
-                ERROR. Respuesta de la API: {{error}}
+
+
+<div class="container">
+    <div class="d-flex justify-content-center h-100">
+
+        <div class="card border border-dark">
+
+            <div class="card-header">
+
+                <h3>Sign In</h3>
+                {{#if mensaje}}
+                <div class="alert alert-{{tipo}} " role="alert">
+                    {{mensaje}}
                 </div>
+                {{/if}}
+
+            </div>
+            <div class="card-body">
+                <form action="/login" method="POST">
+                    <div class="input-group form-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text"><i class="fas fa-user"></i></span>
+                        </div>
+                        <input type="text" class="form-control border" name="usr" placeholder="username">
+
+                    </div>
+                    <div class="input-group form-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text"><i class="fas fa-key"></i></span>
+                        </div>
+                        <input type="password" class="form-control border" name="pwd" placeholder="password">
+                    </div>
+                    <div class="form-group">
+                        <input type="submit" value="Login" class="btn float-right login_btn text-white border">
+                    </div>
+                </form>
+            </div>
+            <div class="card-footer">
+                <div class="d-flex justify-content-center links">
+                    <!-- Button to Open the Modal -->
+                    <form action="/register" method="POST">
+                        <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#myModal">
+                            Sign Up
+                        </button>
+                        <!-- The Modal -->
+                        <div class="modal" id="myModal">
+                            <div class="modal-dialog">
+                                <div class="modal-content bg-dark">
+                                    <!-- Modal Header -->
+                                    <div class="modal-header">
+                                        <h4 class="modal-title">Modal Heading</h4>
+                                        <button type="button" class="close" data-dismiss="modal"></button>
+                                    </div>
+                                    <!-- Modal body -->
+                                    <div class="modal-body">
+                                        <div class="form-group">
+                                            <label for="formGroupExampleInput">User</label>
+                                            <input type="text" name="usr" class="form-control"
+                                                id="formGroupExampleInput" placeholder="Usr" required minlength="6" maxlength="12">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="formGroupExampleInput2">Password</label>
+                                            <input type="text" class="form-control" name="pwd"
+                                                id="formGroupExampleInput2" placeholder="Pwd" required minlength="6" maxlength="12">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="formGroupExampleInput2">Email</label>
+                                            <input type="email" class="form-control" name="email"
+                                                id="formGroupExampleInput3" placeholder="Email" required>
+                                        </div>
+                                        <button type="submit" value="Register"class="btn btn-success text-white"
+                                            >Register</button>
+                    </form>
+                </div>
+
+                <!-- Modal footer -->
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger text-white" data-dismiss="modal">Close</button>
+                </div>
+
+            </div>
         </div>
     </div>
 </div>
-{{/if}}
 
+</div>
+</div>
+</div>
+</div>
