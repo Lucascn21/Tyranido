@@ -23,8 +23,8 @@ npm update
 * [Axios](https://github.com/axios/axios)- Solicitudes HTTP (AJAX) mediante Javascript / NodeJS,
 * [MongoAtlas](https://www.mongodb.com/cloud/atlas) - Base de datos como servicio 
 * [Handlebars](https://handlebarsjs.com)- Motor de plantillas
-* [Nodemon](https://www.npmjs.com/package/nodemon) - Monitorea los cambios en el código fuente que se esta desarrollando y automáticamente re inicia el servidor.
-* [Bootstrap 4](https://getbootstrap.com) - Framework CSS y Javascript
+* [Nodemon](https://www.npmjs.com/package/nodemon) - Monitorea los cambios en el código fuente que se esta desarrollando y automáticamente reinicia el servidor.
+* [Bootstrap 4](https://getbootstrap.com) - Framework CSS.
 
 ## Usage
 Para levantar el servidor, ejecutar nodemon.
