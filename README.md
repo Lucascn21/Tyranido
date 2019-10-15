@@ -6,7 +6,7 @@ Tyranido es mi proyecto final de [ComunidadIT](http://www.comunidadit.org).
 	
  Axios maneja las solicitudes de Node.
 	
- El frontend se compone de vistas de Handlebars y Bootstrap4.
+ El frontend se compone de vistas de Handlebars+Bootstrap4.
  
 
 ## Instalación
