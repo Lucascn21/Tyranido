@@ -39,5 +39,4 @@ nodemon
 
 
 ## Reconocimientos
-* **Ricardo Segretin** - *Profesor* - [Github](https://github.com/rsegretin).
 * **ComunidadIT** - *Oportunidad y Espacio* - [Website](http://www.comunidadit.org).
