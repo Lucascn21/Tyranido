@@ -1,5 +1,6 @@
 # Tyranido
-Tyranido es mi proyecto final de [ComunidadIT](http://www.comunidadit.org).																																																														
+Tyranido es mi proyecto final de [ComunidadIT](http://www.comunidadit.org).					
+
  Se trata de una WebApp que consume una [Api de Peliculas](https://www.omdbapi.com).
 	
  Posee un registro y login, basicos, con base de datos en la nube.
