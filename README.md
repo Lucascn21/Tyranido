@@ -1,10 +1,12 @@
 # Tyranido
-
-Tyranido es mi proyecto final de [ComunidadIT](http://www.comunidadit.org).
+Tyranido es mi proyecto final de [ComunidadIT](http://www.comunidadit.org).																																																														
  Se trata de una WebApp que consume una [Api de Peliculas](https://www.omdbapi.com).
+	
  Posee un registro y login, basicos, con base de datos en la nube.
+	
  Axios maneja las solicitudes de Node.
- El frontend se compone de vistas de Handlebars y Bootstrap4.
+	
+ El frontend se compone de vistas de Handlebars+Bootstrap4.
  
 
 ## Instalación
@@ -21,8 +23,8 @@ npm update
 * [Axios](https://github.com/axios/axios)- Solicitudes HTTP (AJAX) mediante Javascript / NodeJS,
 * [MongoAtlas](https://www.mongodb.com/cloud/atlas) - Base de datos como servicio 
 * [Handlebars](https://handlebarsjs.com)- Motor de plantillas
-* [Nodemon](https://www.npmjs.com/package/nodemon) - Monitorea los cambios en el código fuente que se esta desarrollando y automáticamente re inicia el servidor.
-* [Bootstrap 4](https://getbootstrap.com) - Framework CSS y Javascript
+* [Nodemon](https://www.npmjs.com/package/nodemon) - Monitorea los cambios en el código fuente que se esta desarrollando y automáticamente reinicia el servidor.
+* [Bootstrap 4](https://getbootstrap.com) - Framework CSS.
 
 ## Usage
 Para levantar el servidor, ejecutar nodemon.
