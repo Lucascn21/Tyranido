@@ -1,11 +1,10 @@
 {
     "name": "Tyranido",
     "version": "1.0.0",
-    "description": "",
+    "description": "WebApp que consume api de peliculas",
     "main": "server.js",
     "scripts": {
-        "test": "echo \"Error: no test specified\" && exit 1",
-        "build": "my-framework build --output public"
+        "test": "echo \"Error: no test specified\" && exit 1"
     },
     "keywords": [],
     "author": "",
@@ -17,8 +16,5 @@
         "express-session": "^1.17.0",
         "mongodb": "^3.3.2",
         "nodemon": "^1.19.3"
-    },
-    "engines": {
-        "node": "10.x"
     }
 }

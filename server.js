@@ -100,7 +100,7 @@ app.post('/bla', function(req, res) {
                 //Si recibo array de resultados, lo guardo, sino guardo la data del elemento
                 if (response.data.Search) {
                     data = response.data.Search
-                    console.dir(data)
+                        // console.dir(data)
                     data.forEach(element => {
                         //Si no tengo poster, le pongo esta imagen que avisa que no hay poster
                         if (element.Poster == 'N/A') element.Poster = "/resources/no_imagen.png";
@@ -141,7 +141,8 @@ app.post('/bla', function(req, res) {
             if (!msjError) {
                 //Si la data es un array de datos, paso la lista a la vista y la cantidad de resultados (es solo para la alerta que muestra la cantidad de resultados)
                 if (Array.isArray(data)) {
-                    res.render('peliculas', { listaPeliculas: data, resultados: resultados, pedido: pedido, anios: anios }); //Sin este if, node me da Unhandled promise rejection cuando recibo no recibo data pero si msjerror
+                    req.session.usr = req.body.usr;
+                    res.render('peliculas', { listaPeliculas: data, resultados: resultados, pedido: pedido, anios: anios, nombre: req.session.usr }); //Sin este if, node me da Unhandled promise rejection cuando recibo no recibo data pero si msjerror
                 } else {
                     //Si no he recibido un array en data, es porque el request es de una sola peli, renderizo la vista.
                     //Los ratings vienen en 3 formatos, cada uno lo maneje diferente para transformar su value a un entero correspondiente al %
@@ -174,33 +175,13 @@ app.post('/bla', function(req, res) {
 
 });
 
-app.post('/register', function(req, res) {
-    const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
-    console.dir(req.body)
-    if (req.body.usr && req.body.pwd && req.body.email) {
-        client.connect(err => {
-            const collection = client.db("UsuariosTyranido").collection("TyranidoDB");
-
-            try {
-                collection.insertOne({ usr: req.body.usr, pwd: req.body.pwd, email: req.body.email });
-                res.render('home', { mensaje: 'Register successful, you may login', tipo: 'success' })
-            } catch (e) {
-                print(e);
-            };
-        });
-    } else {
-        console.log("bla");
-    }
-
-    client.close();
-});
 
 
 app.post('/login', function(req, res) {
     //MongoAtlas 2 lo tuve que poner aca porque mongo no le gusta multiples consultas en un mismo cliente
     const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
     //MongoAtlas 2
-    console.dir(req.body);
+    //    console.dir(req.body);
     if (req.body.usr && req.body.pwd) {
         //Si recibo ambos parametros, los busco en la DB
         client.connect(err => {
@@ -212,9 +193,6 @@ app.post('/login', function(req, res) {
                 //.email .usr .pwd y .favorites tienen usuario, contraseña y array de imdb de favoritos
                 collection.findOne({ usr: req.body.usr, pwd: req.body.pwd }, (err, resConsulta) => {
                     // Hecha la búsqueda, cierro la conexión
-
-
-
                     // Si no hubo error...
                     if (!err) {
                         // Si el documento respondido contiene algo, no necesito validar nada: ya sé que
@@ -223,6 +201,7 @@ app.post('/login', function(req, res) {
                             //   console.dir(resConsulta);
 
                             req.session.usr = req.body.usr;
+
                             res.render('peliculas', { nombre: req.session.usr });
                         } else {
                             console.error("Error! algo no coincide");
@@ -253,5 +232,27 @@ app.post('/login', function(req, res) {
 
     client.close();
 });
+
+app.post('/register', function(req, res) {
+    const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
+    //  console.dir(req.body)
+    if (req.body.usr && req.body.pwd && req.body.email) {
+        client.connect(err => {
+            const collection = client.db("UsuariosTyranido").collection("TyranidoDB");
+
+            try {
+                collection.insertOne({ usr: req.body.usr, pwd: req.body.pwd, email: req.body.email });
+                res.render('home', { mensaje: 'Register successful, you may login', tipo: 'success' })
+            } catch (e) {
+                print(e);
+            };
+        });
+    } else {
+        console.log("bla");
+    }
+
+    client.close();
+});
+
 
 app.listen(puerto, () => console.log(`Estoy en https://localhost:${puerto}/`))
