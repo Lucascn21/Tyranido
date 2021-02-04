@@ -27,7 +27,7 @@ npm update
 * [Nodemon](https://www.npmjs.com/package/nodemon) - Monitorea los cambios en el código fuente que se esta desarrollando y automáticamente reinicia el servidor.
 * [Bootstrap 4](https://getbootstrap.com) - Framework CSS.
 
-## Usage
+## Uso
 Para levantar el servidor, ejecutar nodemon.
 ```python
 nodemon
