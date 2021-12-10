@@ -249,4 +249,5 @@ app.post("/register", function (req, res) {
 	client.close();
 });
 
-app.listen(puerto, () => console.log(`Estoy en https://localhost:${puerto}/`));
+app.listen(puerto, () => console.log(`Estoy en http://localhost:${puerto}/`));
+
