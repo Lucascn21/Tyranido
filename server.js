@@ -150,21 +150,21 @@ app.post("/search", function (req, res) {
 				} else {
 					//Si no he recibido un array en data, es porque el request es de una sola peli, renderizo la vista.
 					//Los ratings vienen en 3 formatos, cada uno lo maneje diferente para transformar su value a un entero correspondiente al %
-					data.Ratings.forEach((element) => {
-						if (element.Source == "Internet Movie Database") {
-							//Divido el string, en res[0] tengo el score actual, en res[1] tengo el valor total sobre el cual se divide el score actual
-							let res = element.Value.split("/");
-							element.Value = Math.round((res[0] / res[1]) * 100);
-						} else if (element.Source == "Rotten Tomatoes") {
-							let res = element.Value.split("%");
-							element.Value = parseInt(res[0]);
-						} else if (element.Source == "Metacritic") {
-							element.Value = parseInt(element.Value);
-						} else {
-							console.log("soy algun rating que no consideraste / tenias en ese momento " + element.Value);
-							console.error("soy algun rating que no consideraste / tenias en ese momento " + element.Value);
-						}
-					});
+						data.Ratings.forEach((element) => {
+							if (element.Source == "Internet Movie Database") {
+								//Divido el string, en res[0] tengo el score actual, en res[1] tengo el valor total sobre el cual se divide el score actual
+								let res = element.Value.split("/");
+								element.Value = Math.round((res[0] / res[1]) * 100);
+							} else if (element.Source == "Rotten Tomatoes") {
+								let res = element.Value.split("%");
+								element.Value = parseInt(res[0]);
+							} else if (element.Source == "Metacritic") {
+								element.Value = parseInt(element.Value);
+							} else {
+								console.log("soy algun rating que no consideraste / tenias en ese momento " + element.Value);
+								console.error("soy algun rating que no consideraste / tenias en ese momento " + element.Value);
+							}
+						});
 					//Si no tengo sitio, premios o $ ganada, quiero el string vacio para que handlebars no ponga el elemento en la vista
 					if (data.Website == "N/A") data.Website = "";
 					if (data.Awards == "N/A") data.Awards = "";
